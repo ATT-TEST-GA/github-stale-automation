@@ -35,24 +35,23 @@ pipeline {
 
     stage('Validate Runtime') {
       steps {
-        sh(
-          script: '''
+        sh '''
+          bash -lc '
             set -e
             python3 --version
             python3 - <<EOF
 import requests, zoneinfo
 print("Runtime validation successful")
 EOF
-          ''',
-          shell: '/bin/bash'
-        )
+          '
+        '''
       }
     }
 
     stage('Run Stale Branch Scan') {
       steps {
-        sh(
-          script: '''
+        sh '''
+          bash -lc '
             set -euo pipefail
 
             mkdir -p reports
@@ -62,9 +61,8 @@ EOF
               --itaps "$ITAP_IDS" \
               --months "$MONTHS_OLD" \
               --out reports
-          ''',
-          shell: '/bin/bash'
-        )
+          '
+        '''
       }
     }
   }
