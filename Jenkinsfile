@@ -8,21 +8,9 @@ pipeline {
   }
 
   parameters {
-    string(
-      name: 'ITAP_IDS',
-      defaultValue: 'APM0014540,APM0012058',
-      description: 'Comma-separated application identifiers'
-    )
-    string(
-      name: 'MONTHS_OLD',
-      defaultValue: '6',
-      description: 'Branches inactive for N calendar months'
-    )
-    string(
-      name: 'EMAIL_TO',
-      defaultValue: 'vsreddy.cloudops@gmail.com',
-      description: 'Notification recipients'
-    )
+    string(name: 'ITAP_IDS', defaultValue: 'APM0014540,APM0012058')
+    string(name: 'MONTHS_OLD', defaultValue: '6')
+    string(name: 'EMAIL_TO', defaultValue: 'vsreddy.cloudops@gmail.com')
   }
 
   environment {
@@ -47,33 +35,36 @@ pipeline {
 
     stage('Validate Runtime') {
       steps {
-        sh '''
-          #!/usr/bin/env bash
-          set -e
-
-          python3 --version
-          python3 - <<EOF
+        sh(
+          script: '''
+            set -e
+            python3 --version
+            python3 - <<EOF
 import requests, zoneinfo
 print("Runtime validation successful")
 EOF
-        '''
+          ''',
+          shell: '/bin/bash'
+        )
       }
     }
 
     stage('Run Stale Branch Scan') {
       steps {
-        sh '''
-          #!/usr/bin/env bash
-          set -euo pipefail
+        sh(
+          script: '''
+            set -euo pipefail
 
-          mkdir -p reports
+            mkdir -p reports
 
-          python3 scripts/scan_stale_branches.py \
-            --org "$GITHUB_ORG" \
-            --itaps "$ITAP_IDS" \
-            --months "$MONTHS_OLD" \
-            --out reports
-        '''
+            python3 scripts/scan_stale_branches.py \
+              --org "$GITHUB_ORG" \
+              --itaps "$ITAP_IDS" \
+              --months "$MONTHS_OLD" \
+              --out reports
+          ''',
+          shell: '/bin/bash'
+        )
       }
     }
   }
