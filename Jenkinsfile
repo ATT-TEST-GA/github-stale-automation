@@ -1,3 +1,8 @@
+git remote add origin https://github.com/ATT-TEST-GA/github-ops-automation.git
+
+git push -u origin main
+
+
 pipeline {
   agent any
 
@@ -84,12 +89,14 @@ EOF
     success {
       script {
         if (!fileExists('reports/stale_report.csv')) {
-          echo 'No stale branches found. No notification sent.'
+          echo 'No stale branches found. No email notification sent.'
           return
         }
 
         emailext(
           to: params.EMAIL_TO,
+          from: 'jenkins-noreply@att.com',
+          replyTo: 'devops@att.com',
           subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
           mimeType: 'text/html',
           body: readFile('reports/email.html'),
