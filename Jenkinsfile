@@ -48,7 +48,9 @@ pipeline {
     stage('Validate Runtime') {
       steps {
         sh '''
+          #!/usr/bin/env bash
           set -e
+
           python3 --version
           python3 - <<EOF
 import requests, zoneinfo
@@ -61,7 +63,9 @@ EOF
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
+          #!/usr/bin/env bash
           set -euo pipefail
+
           mkdir -p reports
 
           python3 scripts/scan_stale_branches.py \
@@ -97,4 +101,3 @@ EOF
     }
   }
 }
-
