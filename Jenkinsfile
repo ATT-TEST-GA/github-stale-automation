@@ -22,7 +22,7 @@ pipeline {
     string(
       name: 'EMAIL_TO',
       defaultValue: 'vsreddy.cloudops@gmail.com',
-      description: 'Report recipients'
+      description: 'Notification recipients'
     )
   }
 
@@ -61,14 +61,16 @@ EOF
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
-          set -euo pipefail
-          mkdir -p reports
+          bash -c '
+            set -euo pipefail
+            mkdir -p reports
 
-          python3 scripts/scan_stale_branches.py \
-            --org "$GITHUB_ORG" \
-            --itaps "$ITAP_IDS" \
-            --months "$MONTHS_OLD" \
-            --out reports
+            python3 scripts/scan_stale_branches.py \
+              --org "$GITHUB_ORG" \
+              --itaps "$ITAP_IDS" \
+              --months "$MONTHS_OLD" \
+              --out reports
+          '
         '''
       }
     }
@@ -82,13 +84,13 @@ EOF
     success {
       script {
         if (!fileExists('reports/stale_report.csv')) {
-          echo 'No stale branches found. Skipping email notification.'
+          echo 'No stale branches found. No notification sent.'
           return
         }
 
         emailext(
           to: params.EMAIL_TO,
-          subject: "Stale GitHub Branch Report – ${env.GITHUB_ORG}",
+          subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
           mimeType: 'text/html',
           body: readFile('reports/email.html'),
           attachmentsPattern: 'reports/*'
