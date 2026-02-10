@@ -1,8 +1,3 @@
-git remote add origin https://github.com/ATT-TEST-GA/github-ops-automation.git
-
-git push -u origin main
-
-
 pipeline {
   agent any
 
@@ -66,7 +61,7 @@ EOF
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
-          bash -c '
+          bash -lc '
             set -euo pipefail
             mkdir -p reports
 
