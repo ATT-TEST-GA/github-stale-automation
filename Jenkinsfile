@@ -5,12 +5,26 @@ pipeline {
     timestamps()
     disableConcurrentBuilds()
     buildDiscarder(logRotator(numToKeepStr: '30'))
+    timeout(time: 30, unit: 'MINUTES')
+    ansiColor('xterm')
   }
 
   parameters {
-    string(name: 'ITAP_IDS', defaultValue: 'APM0014540,APM0012058')
-    string(name: 'MONTHS_OLD', defaultValue: '6')
-    string(name: 'EMAIL_TO', defaultValue: 'vsreddy.cloudops@gmail.com')
+    string(
+      name: 'ITAP_IDS',
+      defaultValue: 'APM0014540,APM0012058',
+      description: 'Comma-separated ITAP identifiers'
+    )
+    string(
+      name: 'MONTHS_OLD',
+      defaultValue: '6',
+      description: 'Branches inactive for N calendar months'
+    )
+    string(
+      name: 'EMAIL_TO',
+      defaultValue: 'vsreddy.cloudops@gmail.com',
+      description: 'Report recipients'
+    )
   }
 
   environment {
@@ -36,13 +50,12 @@ pipeline {
     stage('Validate Runtime') {
       steps {
         sh '''
-          bash -lc '
-            set -e
-            python3 --version
-            python3 - <<EOF
+          set -e
+          python3 --version
+          python3 - <<EOF
+import sys
 print("Runtime validation successful")
 EOF
-          '
         '''
       }
     }
@@ -50,16 +63,14 @@ EOF
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
-          bash -lc '
-            set -euo pipefail
-            mkdir -p reports
+          set -euo pipefail
+          mkdir -p reports
 
-            python3 scripts/scan_stale_branches.py \
-              --org "$GITHUB_ORG" \
-              --itaps "$ITAP_IDS" \
-              --months "$MONTHS_OLD" \
-              --out reports
-          '
+          python3 scripts/scan_stale_branches.py \
+            --org "$GITHUB_ORG" \
+            --itaps "$ITAP_IDS" \
+            --months "$MONTHS_OLD" \
+            --out reports
         '''
       }
     }
@@ -73,7 +84,7 @@ EOF
     success {
       script {
         if (!fileExists('reports/stale_report.csv')) {
-          echo 'No stale branches found. Email not sent.'
+          echo 'No stale branches found. Skipping email notification.'
           return
         }
 
