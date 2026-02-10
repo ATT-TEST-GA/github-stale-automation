@@ -40,7 +40,6 @@ pipeline {
             set -e
             python3 --version
             python3 - <<EOF
-import requests, zoneinfo
 print("Runtime validation successful")
 EOF
           '
@@ -53,7 +52,6 @@ EOF
         sh '''
           bash -lc '
             set -euo pipefail
-
             mkdir -p reports
 
             python3 scripts/scan_stale_branches.py \
@@ -75,13 +73,13 @@ EOF
     success {
       script {
         if (!fileExists('reports/stale_report.csv')) {
-          echo 'No stale branches detected. No email sent.'
+          echo 'No stale branches found. Email not sent.'
           return
         }
 
         emailext(
           to: params.EMAIL_TO,
-          subject: "⚠️ Stale Git Branch Report – ${env.GITHUB_ORG}",
+          subject: "Stale GitHub Branch Report – ${env.GITHUB_ORG}",
           mimeType: 'text/html',
           body: readFile('reports/email.html'),
           attachmentsPattern: 'reports/*'
