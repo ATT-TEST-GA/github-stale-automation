@@ -6,7 +6,6 @@ pipeline {
     disableConcurrentBuilds()
     buildDiscarder(logRotator(numToKeepStr: '30'))
     timeout(time: 30, unit: 'MINUTES')
-    ansiColor('xterm')
   }
 
   parameters {
@@ -53,7 +52,6 @@ pipeline {
           set -e
           python3 --version
           python3 - <<EOF
-import sys
 print("Runtime validation successful")
 EOF
         '''
