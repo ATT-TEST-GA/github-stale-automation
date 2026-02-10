@@ -1,0 +1,385 @@
+Script started on 2026-02-09 19:22:32-05:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="156" LINES="41"]
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ v[Kcat j[KJenkinsfile 
+[?2004l[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ vi Jenkinsfile 
+[?2004l[?1049h[22;0;0t[>4;2m[?1h=[?2004h[?1004h[1;41r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[41;1H"Jenkinsfile" 0L, 0B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[2;1H[94m~                                                                                                                                                           [3;1H~                                                                                                                                                           [4;1H~                                                                                                                                                           [5;1H~                                                                                                                                                           [6;1H~                                                                                                                                                           [7;1H~                                                                                                                                                           [8;1H~                                                                                                                                                           [9;1H~                                                                                                                                                           [10;1H~                                                                                                                                                           [11;1H~                                                                                                                                                           [12;1H~                                                                                                                                                           [13;1H~                                                                                                                                                           [14;1H~                                                                                                                                                           [15;1H~                                                                                                                                                           [16;1H~                                                                                                                                                           [17;1H~                                                                                                                                                           [18;1H~                                                                                                                                                           [19;1H~                                                                                                                                                           [20;1H~                                                                                                                                                           [21;1H~                                                                                                                                                           [22;1H~                                                                                                                                                           [23;1H~                                                                                                                                                           [24;1H~                                                                                                                                                           [25;1H~                                                                                                                                                           [26;1H~                                                                                                                                                           [27;1H~                                                                                                                                                           [28;1H~                                                                                                                                                           [29;1H~                                                                                                                                                           [30;1H~                                                                                                                                                           [31;1H~                                                                                                                                                           [32;1H~                                                                                                                                                           [33;1H~                                                                                                                                                           [34;1H~                                                                                                                                                           [35;1H~                                                                                                                                                           [36;1H~                                                                                                                                                           [37;1H~                                                                                                                                                           [38;1H~                                                                                                                                                           [39;1H~                                                                                                                                                           [40;1H~                                                                                                                                                           [m[41;139H0,0-1[9CAll[1;1H[?25h[?4m[?12$p[?25l[41;129Hg[1;1H[41;130Hb[1;1H[41;131H:[1;1H[41;132Hc[1;1H[41;133Hc[1;1H[41;134Hc[1;1H[41;135Hc[1;1H[41;136H/[1;1H[41;137Hc[1;1H[41;138Hc[1;1H[41;129H          [1;1H[41;129H/[1;1H[41;130Hc[1;1H[41;131Hc[1;1H[41;132Hc[1;1H[41;133Hc[1;1H[41;134H/[1;1H[41;135Hc[1;1H[41;136Hc[1;1H[41;137Hc[1;1H[41;138Hc[1;1H[41;129H          [1;1H[?25h[?25l[41;129Hg[1;1H[41;130Hb[1;1H[41;131H:[1;1H[41;132H0[1;1H[41;133Hc[1;1H[41;134H0[1;1H[41;135Hc[1;1H[41;136H/[1;1H[41;137H0[1;1H[41;138Hc[1;1H[41;129H          [1;1H[41;129H/[1;1H[41;130H0[1;1H[41;131Hc[1;1H[41;132H0[1;1H[41;133Hc[1;1H[41;134H/[1;1H[41;135H0[1;1H[41;136Hc[1;1H[41;137H0[1;1H[41;138Hc[1;1H[41;129H          [1;1H[27m[23m[29m[m[H[2J[2;1H[94m~                                                                                                                                                           [3;1H~                                                                                                                                                           [4;1H~                                                                                                                                                           [5;1H~                                                                                                                                                           [6;1H~                                                                                                                                                           [7;1H~                                                                                                                                                           [8;1H~                                                                                                                                                           [9;1H~                                                                                                                                                           [10;1H~                                                                                                                                                           [11;1H~                                                                                                                                                           [12;1H~                                                                                                                                                           [13;1H~                                                                                                                                                           [14;1H~                                                                                                                                                           [15;1H~                                                                                                                                                           [16;1H~                                                                                                                                                           [17;1H~                                                                                                                                                           [18;1H~                                                                                                                                                           [19;1H~                                                                                                                                                           [20;1H~                                                                                                                                                           [21;1H~                                                                                                                                                           [22;1H~                                                                                                                                                           [23;1H~                                                                                                                                                           [24;1H~                                                                                                                                                           [25;1H~                                                                                                                                                           [26;1H~                                                                                                                                                           [27;1H~                                                                                                                                                           [28;1H~                                                                                                                                                           [29;1H~                                                                                                                                                           [30;1H~                                                                                                                                                           [31;1H~                                                                                                                                                           [32;1H~                                                                                                                                                           [33;1H~                                                                                                                                                           [34;1H~                                                                                                                                                           [35;1H~                                                                                                                                                           [36;1H~                                                                                                                                                           [37;1H~                                                                                                                                                           [38;1H~                                                                                                                                                           [39;1H~                                                                                                                                                           [40;1H~                                                                                                                                                           [m[41;139H0,0-1[9CAll"Jenkinsfile" 0L, 0B[1;1H[?25h[?25l[41;129H^[[1;1H[41;129H  [1;1H[41;129H^[[1;1H[41;129H  [1;1H[?25h[?25l[41;129Hi[1;1H[41;129H [1;1H[41;1H[1m-- INSERT --[m[41;13H[K[41;139H0,1[11CAll[1;1H[?25h[?25lpipeline {[?25h[?25l
+  agent [1m[96many[m[2;12H[K[3;1H[K[4;1H  [4;3H[K[4;3H[?25h[?25loptions {
+    timestamps()[5;17H[K[6;1H    d[6;6H[K[6;6H[?25h[?25lisableConcurrent[?25h[?25lBuilds()
+    buildDiscarder(logR[7;24H[K[7;24H[?25h[?25lotator(numToKeep[?25h[?25lStr: [95m'30'[m))
+  }[8;4H[K[9;1H[K[9;1H[?25h[?25l
+  parameters {[10;15H[K[11;1H[K[11;1H[?25h[?25l    string(
+    [12;5H[K[12;5H[?25h[?25l[93m      name[m: [95m'ITAP_ID[?25h[?25lS'[m,
+[93m      defaultValue[m: [95m'APM0014540,APM0012058'[m,[13;45H[K[13;45H[?25h[?25l
+[93m      description[m: [95m'Comma-separated application i[m[14;50H[K[14;50H[?25h[?25l[95mdentifiers'[m
+    )[15;6H[K[16;1H    string([16;12H[K[17;1H[93m      name[m: [95m'MONTHS_OLD'[m,[17;26H[K[17;26H[?25h[?25l
+[93m      defaultValue[m: [95m'6'[m,[18;25H[K[19;1H[93m      description[m: [95m'Branches in[m[19;32H[K[19;32H[?25h[?25l[95mactive for N calendar months'[m
+    )[20;6H[K[21;1H    string([21;12H[K[22;1H[93m      name[m:[22;12H[K[22;12H[?25h[?25l [95m'EMAIL_TO'[m,
+[93m      defaultValue[m: [95m'vsreddy.cloudops@gmail.com'[m[23;49H[K[23;49H[?25h[?25l,
+[93m      description[m: [95m'Notification recipients'[m[24;45H[K[25;1H    )[25;6H[K[26;1H  }[26;4H[K[27;1H[K[28;1H  e[28;4H[K[28;4H[?25h[?25lnvironment {
+    GITHUB_ORG   = [95m'ATT-TEST-GA'[m[29;33H[K[30;1H    GITHUB_TOKEN[30;17H[K[30;17H[?25h[?25l = credentials([95m'github-pat'[m)
+    TZ = [95m'UTC'[m[31;15H[K[32;1H  }[32;4H[K[33;1H[K[34;1H  stages {[34;11H[K[35;1H[K[36;1H [36;2H[K[36;2H[?25h[?25l   stage([95m'Clean Workspace'[m) {
+      steps {[37;14H[K[38;1H        deleteDir()[38;20H[K[38;20H[?25h[?25l
+      }[39;8H[K[40;1H    }[40;6H[K[1;40r[1;1H[4M[1;41r[38;5Hstage([95m'Checkout Source'[m) {[39;7Hsteps {[41;11H[1m(paste) --[m[41;139H[K[40;3H[?25h[?25l      checkout scm[9C[?25h[?25l[1;40r[1;1H[4M[1;41r[37;7H}
+    }[40;5Hstage([95m'Validate Runtime'[m) {[40;15H[?25h[?25l[1;40r[1;1H[4M[1;41r[37;7Hsteps {[38;9Hsh [95m'''
+          set -e
+          python3 --version[?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;1H[95m          python3 - <<EOF
+import requests, zoneinfoimpor[?25h[?25l[1;40r[m[1;1H[4M[1;41r[37;1H[95mprint("Runtime validation successful")
+EOF
+        '''[m[40;7H}  [?25h[?25l[1;40r[1;1H[5M[1;41r[36;5H}[38;5Hstage([95m'Run Stale Branch Scan'[m) {[39;7Hsteps {[40;9Hsh [95m'''[8C[?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;1H[95m          set -euo pipefail
+          mkdir -p reports[40;7H[?25h[?25l[1;40r[m[1;1H[3M[1;41r[39;1H[95m          python3 scripts/scan_stale_branches.py \
+            --org "$GITHUB_ORG" \ [?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;1H[95m            --itaps "$ITAP_IDS" \
+            --months "$MONTHS_OLD" \ [?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;1H[95m            --out reports
+        '''[?25h[?25l[1;40r[m[1;1H[7M[1;41r[34;7H}
+    }
+  }
+
+  post {
+    always {[40;7HarchiveArtifacts artifacts: [95m'reports/*'[m, fingerprint: [95mtrue[m  [?25h[?25l[1;40r[1;1H[3M[1;41r[38;5H}[40;5Hsuccess {[23C[?25h[?25l[1;40r[1;1H[2M[1;41r[39;7Hscript {[40;9H[93mif[m (!fileExists([95m'reports/stale_report.csv'[m)) {[40;45H[?25h[?25l[1;40r[40;1H
+[1;41r[40;11Hecho [95m'No stale branches detected. No email sent.'[m [?25h[?25l[1;40r[1;1H[5M[1;41r[36;11H[93mreturn[m[37;9H}[39;9Hemailext(
+[93m          to[m: params.EMAIL_TO,[?25h[?25l[1;40r[40;1H
+[1;41r[40;1H[93m          subject[m: [95m"⚠️[40;22H Stale Git Branch Report –[40;48H [m[1m[96m${env.GITHUB_ORG}[m[95m"[m,[40;22H[?25h[?25l[1;40r[40;1H
+[1;41r[40;1H[93m          mimeType[m: [95m'text/html'[m,[40;3H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;1H[93m          body[m: readFile([95m'reports/email.html'[m),
+[93m          attachmentsPattern[m: [95m'reports/*'[40;5H[?25h[?25l[1;40r[m[1;1H[6M[1;41r[35;9H)[36;7H}
+    }
+  }
+}[41;11H[1m--a[m[41;13H[K[41;139H100,1[9CBot[40;1H[?25h[41;1H[K[40;1H[?25l[41;129H^[[40;1H[41;129H  [40;1H[41;139H100,0-1[7CBot[40;1H[?25h[?25l[41;129H:[40;1H[41;129H[K[41;1H:[?25hwq![?25l[?2004l[>4;m"Jenkinsfile" 100L, 1968B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[23;0;0t[?25h[>4;m[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ cat Jenkinsfile 
+[?2004lpipeline {
+  agent any
+
+  options {
+    timestamps()
+    disableConcurrentBuilds()
+    buildDiscarder(logRotator(numToKeepStr: '30'))
+  }
+
+  parameters {
+    string(
+      name: 'ITAP_IDS',
+      defaultValue: 'APM0014540,APM0012058',
+      description: 'Comma-separated application identifiers'
+    )
+    string(
+      name: 'MONTHS_OLD',
+      defaultValue: '6',
+      description: 'Branches inactive for N calendar months'
+    )
+    string(
+      name: 'EMAIL_TO',
+      defaultValue: 'vsreddy.cloudops@gmail.com',
+      description: 'Notification recipients'
+    )
+  }
+
+  environment {
+    GITHUB_ORG   = 'ATT-TEST-GA'
+    GITHUB_TOKEN = credentials('github-pat')
+    TZ = 'UTC'
+  }
+
+  stages {
+
+    stage('Clean Workspace') {
+      steps {
+        deleteDir()
+      }
+    }
+
+    stage('Checkout Source') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Validate Runtime') {
+      steps {
+        sh '''
+          set -e
+          python3 --version
+          python3 - <<EOF
+import requests, zoneinfo
+print("Runtime validation successful")
+EOF
+        '''
+      }
+    }
+
+    stage('Run Stale Branch Scan') {
+      steps {
+        sh '''
+          set -euo pipefail
+          mkdir -p reports
+
+          python3 scripts/scan_stale_branches.py \
+            --org "$GITHUB_ORG" \
+            --itaps "$ITAP_IDS" \
+            --months "$MONTHS_OLD" \
+            --out reports
+        '''
+      }
+    }
+  }
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'reports/*', fingerprint: true
+    }
+
+    success {
+      script {
+        if (!fileExists('reports/stale_report.csv')) {
+          echo 'No stale branches detected. No email sent.'
+          return
+        }
+
+        emailext(
+          to: params.EMAIL_TO,
+          subject: "⚠️ Stale Git Branch Report – ${env.GITHUB_ORG}",
+          mimeType: 'text/html',
+          body: readFile('reports/email.html'),
+          attachmentsPattern: 'reports/*'
+        )
+      }
+    }
+  }
+}
+
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ cd[K[Kls
+[?2004l Jenkinsfile   README.md   [0m[01;34mdocs[0m   [01;34mreports[0m   [01;34mscripts[0m  '{'
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ cd scripts/
+[?2004l[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ ls
+[?2004l[0m[01;32mscan_stale_branches.py[0m
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ vi scan_stale_branches.py 
+[?2004l[?1049h[22;0;0t[>4;2m[?1h=[?2004h[?1004h[1;41r[?12h[?12l[22;2t[22;1t[27m[23m[29m[m[H[2J[?25l[41;1H"scan_stale_branches.py" 0L, 0B[2;1H▽[6n[2;1H  [3;1HPzz\[0%m[6n[3;1H           [1;1H[>c]10;?]11;?[2;1H[94m~                                                                                                                                                           [3;1H~                                                                                                                                                           [4;1H~                                                                                                                                                           [5;1H~                                                                                                                                                           [6;1H~                                                                                                                                                           [7;1H~                                                                                                                                                           [8;1H~                                                                                                                                                           [9;1H~                                                                                                                                                           [10;1H~                                                                                                                                                           [11;1H~                                                                                                                                                           [12;1H~                                                                                                                                                           [13;1H~                                                                                                                                                           [14;1H~                                                                                                                                                           [15;1H~                                                                                                                                                           [16;1H~                                                                                                                                                           [17;1H~                                                                                                                                                           [18;1H~                                                                                                                                                           [19;1H~                                                                                                                                                           [20;1H~                                                                                                                                                           [21;1H~                                                                                                                                                           [22;1H~                                                                                                                                                           [23;1H~                                                                                                                                                           [24;1H~                                                                                                                                                           [25;1H~                                                                                                                                                           [26;1H~                                                                                                                                                           [27;1H~                                                                                                                                                           [28;1H~                                                                                                                                                           [29;1H~                                                                                                                                                           [30;1H~                                                                                                                                                           [31;1H~                                                                                                                                                           [32;1H~                                                                                                                                                           [33;1H~                                                                                                                                                           [34;1H~                                                                                                                                                           [35;1H~                                                                                                                                                           [36;1H~                                                                                                                                                           [37;1H~                                                                                                                                                           [38;1H~                                                                                                                                                           [39;1H~                                                                                                                                                           [40;1H~                                                                                                                                                           [m[41;139H0,0-1[9CAll[1;1H[?25h[?4m[?12$p[?25l[41;129Hg[1;1H[41;130Hb[1;1H[41;131H:[1;1H[41;132Hc[1;1H[41;133Hc[1;1H[41;134Hc[1;1H[41;135Hc[1;1H[41;136H/[1;1H[41;137Hc[1;1H[41;138Hc[1;1H[41;129H          [1;1H[41;129H/[1;1H[41;130Hc[1;1H[41;131Hc[1;1H[41;132Hc[1;1H[41;133Hc[1;1H[41;134H/[1;1H[41;135Hc[1;1H[41;136Hc[1;1H[41;137Hc[1;1H[41;138Hc[1;1H[41;129H          [1;1H[?25h[?25l[41;129Hg[1;1H[41;130Hb[1;1H[41;131H:[1;1H[41;132H0[1;1H[41;133Hc[1;1H[41;134H0[1;1H[41;135Hc[1;1H[41;136H/[1;1H[41;137H0[1;1H[41;138Hc[1;1H[41;129H          [1;1H[41;129H/[1;1H[41;130H0[1;1H[41;131Hc[1;1H[41;132H0[1;1H[41;133Hc[1;1H[41;134H/[1;1H[41;135H0[1;1H[41;136Hc[1;1H[41;137H0[1;1H[41;138Hc[1;1H[41;129H          [1;1H[27m[23m[29m[m[H[2J[2;1H[94m~                                                                                                                                                           [3;1H~                                                                                                                                                           [4;1H~                                                                                                                                                           [5;1H~                                                                                                                                                           [6;1H~                                                                                                                                                           [7;1H~                                                                                                                                                           [8;1H~                                                                                                                                                           [9;1H~                                                                                                                                                           [10;1H~                                                                                                                                                           [11;1H~                                                                                                                                                           [12;1H~                                                                                                                                                           [13;1H~                                                                                                                                                           [14;1H~                                                                                                                                                           [15;1H~                                                                                                                                                           [16;1H~                                                                                                                                                           [17;1H~                                                                                                                                                           [18;1H~                                                                                                                                                           [19;1H~                                                                                                                                                           [20;1H~                                                                                                                                                           [21;1H~                                                                                                                                                           [22;1H~                                                                                                                                                           [23;1H~                                                                                                                                                           [24;1H~                                                                                                                                                           [25;1H~                                                                                                                                                           [26;1H~                                                                                                                                                           [27;1H~                                                                                                                                                           [28;1H~                                                                                                                                                           [29;1H~                                                                                                                                                           [30;1H~                                                                                                                                                           [31;1H~                                                                                                                                                           [32;1H~                                                                                                                                                           [33;1H~                                                                                                                                                           [34;1H~                                                                                                                                                           [35;1H~                                                                                                                                                           [36;1H~                                                                                                                                                           [37;1H~                                                                                                                                                           [38;1H~                                                                                                                                                           [39;1H~                                                                                                                                                           [40;1H~                                                                                                                                                           [m[41;139H0,0-1[9CAll"scan_stale_branches.py" 0L, 0B[1;1H[?25h[?25l[41;129H^[[1;1H[41;129H  [1;1H[41;129H^[[1;1H[41;129H  [1;1H[?25h[?25l[41;129Hi[1;1H[41;129H [1;1H[41;1H[1m-- INSERT --[m[41;13H[K[41;139H0,1[11CAll[1;1H[?25h[?25l[96m#!/usr/bin/env python3[m
+[95m"""[m[2;4H[K[2;4H[?25h[?25l
+[95mEnterprise GitH[m[3;16H[K[3;16H[?25h[?25l[95mub stale branch [?25h[?25lscanner
+Read-onl[m[4;9H[K[4;9H[?25h[?25l[95my, audit-safe, c[?25h[?25lalendar-month ba[?25h[?25lsed
+"""[m[5;4H[K[6;1H[K[7;1H[38;5;81mimport[m [7;8H[K[7;8H[?25h[?25largparse
+[38;5;81mimport[m [8;8H[K[8;8H[?25h[?25lcsv
+[38;5;81mimport[m datet[9;13H[K[9;13H[?25h[?25lime
+[38;5;81mimport[m os[10;10H[K[11;1Him[11;3H[K[11;3H[?25h[?25l[38;5;81mimport[m requests
+fr[12;3H[K[12;3H[?25h[?25l[38;5;81mfrom[m zoneinfo impo[?25h[?25l[38;5;81mimport[m ZoneInfo[13;1H[K[14;1H[96m# ---- Constants (Governance Approved) ----[m[14;44H[K[15;1HPROT[15;5H[K[15;5H[?25h[?25lECTED_BRANCHES = {[95m"main"[m, [95m"master"[m, [95m"develop"[m, [95m"prod"[m}
+RELEASE[16;8H[K[16;8H[?25h[?25l_PREFIX = [95m"release/"[m
+ET = ZoneInfo([95m"America/New_York"[m)[17;34H[K[18;1HUTC = d[18;8H[K[18;8H[?25h[?25latetime.timezone.utc[19;1H[K[20;1H[96m# ---- Helpers ----[m[20;20H[K[21;1H[93mdef[m [1m[96mgithub_get[m(url: [21;21H[K[21;21H[?25h[?25l[1m[96mstr[m, headers: [1m[96mdict[m):
+    response = requests.get(url, headers=h[22;43H[K[22;43H[?25h[?25leaders, timeout=[95m30[m)
+    response.raise_for_status()[23;32H[K[24;1H    [93mreturn[m [24;12H[K[24;12H[?25h[?25lresponse.json()[25;1H[K[26;1H[93mdef[m [1m[96mparse_args[m():[26;18H[K[27;1H    parser = argparse.Argume[27;29H[K[27;29H[?25h[?25lntParser(description=[95m"Scan GitHub org for stale branches"[m)
+    [28;5H[K[28;5H[?25h[?25lparser.add_argument([95m"--org"[m, required=[1m[96mTrue[m)
+    parser.add_argu[29;20H[K[29;20H[?25h[?25lment([95m"--itaps"[m, required=[1m[96mTrue[m)
+    parser.add_argument([95m"--month[m[30;33H[K[30;33H[?25h[?25l[95ms"[m, [1m[96mtype[m=[1m[96mint[m, required=[1m[96mTrue[m)
+    parser.add_argument([95m"--out"[m, r[31;35H[K[31;35H[?25h[?25lequired=[1m[96mTrue[m)
+    [93mreturn[m parser.parse_args()[32;31H[K[33;1H[K[34;1H[96m# ---- Main Logic[m[34;18H[K[34;18H[?25h[?25l[96m ----[m
+[93mdef[m [1m[96mmain[m():[35;12H[K[36;1H    args = parse_args()[36;24H[K[37;1H[K[38;1H    token = os.envir[38;21H[K[38;21H[?25h[?25lon.get([95m"GITHUB_TOKEN"[m)
+    [93mif[m [93mnot[m token:[39;18H[K[40;1H        [93mraise[m RuntimeE[40;23H[K[40;23H[?25h[?25l[40;15H[38;5;121mRuntimeError[m([95m"GITHUB_TOKEN not set"[m)[40;18H[?25h[?25l[1;40r[1;1H[3M[1;41r[39;5Hheaders = {[40;9H[95m"Authorization"[m: f[95m"token {token}"[m,[41;11H[1m(paste) --[m[41;139H[K[40;38H[?25h[?25l[1;40r[40;1H
+[1;41r[40;9H[95m"Accept"[m: [95m"application/vnd.github+json"[?25h[?25l[1;40r[m[1;1H[3M[1;41r[38;5H}[40;5Hitap_ids = [i.strip() [93mfor[m i [93min[m args.itaps.split([95m","[m)][40;10H[?25h[?25l[1;40r[1;1H[4M[1;41r[38;5Hnow_et = datetime.datetime.now(ET)[40;5H[96m# Calendar month cutoff[17C[?25h[?25l[1;40r[m[40;1H
+[1;41r[40;5Hcutoff_month = now_et.month - args.months  [?25h[?25l[1;40r[1;1H[3M[1;41r[38;5Hcutoff_year = now_et.year
+    [93mwhile[m cutoff_month <= [95m0[m:[40;9Hcutoff_month += [95m12[40;14H[?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;9Hcutoff_year -= [95m1[m
+    cutoff = datetime.datetime(cutoff_year, cutoff_month, [95m1[m, tzinfo=ET)   [?25h[?25l[1;40r[1;1H[2M[1;41r[40;5Hrepos = [][8C[?25h[?25l[1;40r[1;1H[3M[1;41r[38;5Hpage = [95m1[m
+    [93mwhile[m [1m[96mTrue[m:[40;9Hbatch = github_get([30C[?25h[?25l[1;40r[40;1H
+[1;41r[40;13Hf[95m"https://api.github.com/orgs/{args.org}/repos?per_page=100&page={page}"[m,    [?25h[?25l[1;40r[1;1H[3M[1;41r[38;13Hheaders[39;9H)[40;9H[93mif[m [93mnot[m batch:      [?25h[?25l[1;40r[1;1H[2M[1;41r[39;13H[93mbreak[m[40;9Hrepos.extend(batch)[40;20H[?25h[?25l[1;40r[1;1H[5M[1;41r[36;9Hpage += [95m1[m[38;5Hstale_records = [][40;5H[93mfor[m repo [93min[m repos:[37C[?25h[?25l[1;40r[40;1H
+[1;41r[40;9H[93mif[m [93mnot[m [1m[96many[m(itap [93min[m repo[[95m"name"[m] [93mfor[m itap [93min[m itap_ids):[40;38H[?25h[?25l[1;40r[1;1H[3M[1;41r[38;13H[93mcontinue[m[40;9Hbranches = github_get(repo[[95m"branches_url"[m].replace([95m"{/branch}"[m, [95m""[m), headers)[40;14H[?25h[?25l[1;40r[1;1H[2M[1;41r[40;9H[93mfor[m branch [93min[m branches:[40;10H[?25h[?25l[1;40r[1;1H[3M[1;41r[38;13Hname = branch[[95m"name"[m][40;13H[93mif[m branch.get([95m"protected"[m):[40;8H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;17H[93mcontinue[40;13Hif[m name [93min[m PROTECTED_BRANCHES [93mor[m name.startswith(RELEASE_P[?25h[?25lREFIX):[40;30H[?25h[?25l[1;40r[1;1H[3M[1;41r[38;17H[93mcontinue[m[40;13Hcommit_info = github_get(branch[[95m"commit"[m][[95m"url"[m], headers)[[95m"commit"[m][40;12H[?25h[?25l[1;40r[40;1H
+[1;41r[40;13Hcommit_utc = datetime.datetime.strptime([40;22H[?25h[?25l[1;40r[40;1H
+[1;41r[40;17Hcommit_info[[95m"author"[m][[95m"date"[m],[?25h[?25l[1;40r[1;1H[2M[1;41r[39;17H[95m"%Y-%m-%dT%H:%M:%SZ"[m[40;13H).replace(tzinfo=UTC)[?25h[?25l[1;40r[1;1H[2M[1;41r[40;13Hcommit_et = commit_utc.astimezone(ET)    [?25h[?25l[1;40r[1;1H[3M[1;41r[39;13H[93mif[m commit_et <= cutoff:[40;17Hage_months = (      [?25h[?25l[1;40r[40;1H
+[1;41r[40;21H(now_et.year - commit_et.year) * [95m12[40;44H[?25h[?25l[1;40r[m[40;1H
+[1;41r[40;21H+ (now_et.month - commit_et.month)[40;33H[?25h[?25l[1;40r[1;1H[3M[1;41r[38;17H)[40;17Hstale_records.append([[40;23H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;21Hrepo[[95m"name"[m],[40;21Hname,[34C[?25h[?25l[1;40r[40;1H
+[1;41r[40;21Hcommit_et.strftime([95m"%Y-%m-%d %I:%M %p %Z"[m),[40;27H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;21Hage_months,[40;21Hcommit_info[[95m"author"[m][[95m"name"[m] [93mor[m [95m"unknown"[m,[40;26H[?25h[?25l[1;40r[40;1H
+[1;41r[40;21Hcommit_info[[95m"author"[m][[95m"email"[m] [93mor[m [95m"unknown"[m    [?25h[?25l[1;40r[1;1H[3M[1;41r[38;17H])[40;5H[93mif[m [93mnot[m stale_records:[?25h[?25l[1;40r[1;1H[3M[1;41r[38;9H[93mreturn[m[40;5Hos.makedirs(args.out, exist_ok=[1m[96mTrue[m)[40;18H[?25h[?25l[1;40r[1;1H[3M[1;41r[39;5H[96m# CSV (machine-readable)[m
+    csv_path = f[95m"{args.out}/stale_report.csv"[40;35H[?25h[?25l[1;40r[m[40;1H
+[1;41r[40;5H[93mwith[m [1m[96mopen[m(csv_path, [95m"w"[m, newline=[95m""[m) [93mas[m csvfile:[40;8H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;9Hwriter = csv.writer(csvfile)[40;9Hwriter.writerow([[19C[?25h[?25l[1;40r[40;1H
+[1;41r[40;13H[95m"Repository"[m, [95m"Branch"[m, [95m"LastCommit(ET)"[m,[40;11H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;13H[95m"AgeMonths"[m, [95m"Author"[m, [95m"Email"[m[40;9H])[11C[?25h[?25l[1;40r[1;1H[3M[1;41r[38;9Hwriter.writerows(stale_records)[40;5H[96m# TXT (human-readable)[40;12H[?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;5Htxt_path = f[95m"{args.out}/stale_report.txt"[m
+    [93mwith[m [1m[96mopen[m(txt_path, [95m"w"[m) [93mas[m txtfile: [?25h[?25l[1;40r[1;1H[2M[1;41r[39;9H[93mfor[m r [93min[m stale_records:[40;13Htxtfile.write(   [?25h[?25l[1;40r[1;1H[2M[1;41r[39;17Hf[95m"Repo: {r[0]}[m[38;5;224m\n[m[95m"[m[40;17Hf[95m"Branch: {r[1]}[m[38;5;224m\n[m[95m"[?25h[?25l[1;40r[m[40;1H
+[1;41r[40;17Hf[95m"Last Commit: {r[2]}[m[38;5;224m\n[m[95m"[40;13H[?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;17Hf[95m"Age: {r[3]} months[m[38;5;224m\n[m[95m"[m[40;17Hf[95m"Author: {r[4]}[m[38;5;224m\n[m[95m"[m    [?25h[?25l[1;40r[1;1H[2M[1;41r[39;17Hf[95m"Email: {r[5]}[m[38;5;224m\n[m[95m"[m[40;17H+ [95m"-"[m * [95m60[m + [95m"[m[38;5;224m\n[m[95m"[m [?25h[?25l[1;40r[1;1H[4M[1;41r[37;13H)[39;5H[96m# Email HTML[m
+    html_path = f[95m"{args.out}/email.html"[40;24H[?25h[?25l[1;40r[m[40;1H
+[1;41r[40;5H[93mwith[m [1m[96mopen[m(html_path, [95m"w"[m) [93mas[m html:[9C[?25h[?25l[1;40r[40;1H
+[1;41r[40;9Hhtml.write([95m"<h3>Stale Git Branch Report</h3>"[m) [?25h[?25l[1;40r[40;1H
+[1;41r[40;9Hhtml.write([95m"<table border='1' cellpadding='6'>"[m)[40;42H[?25h[?25l[1;40r[1;1H[2M[1;41r[39;9Hhtml.write([40;13H[95m"<tr><th>Repo</th><th>Branch</th><th>Last Commit</th>"[40;38H[?25h[?25l[1;40r[m[40;1H
+[1;41r[40;13H[95m"<th>Age (Months)</th><th>Author</th><th>Email</th></tr>"[40;21H[?25h[?25l[1;40r[m[1;1H[2M[1;41r[39;9H)[40;9H[93mfor[m r [93min[m stale_records:[20C[?25h[?25l[1;40r[40;1H
+[1;41r[40;13Hhtml.write([95m"<tr>"[m + [95m""[m.join(f[95m"<td>{c}</td>"[m [93mfor[m c [93min[m r) + [95m"</tr>"[m)   [?25h[?25l[1;40r[1;1H[5M[1;41r[36;9Hhtml.write([95m"</table>"[m)
+
+[93mif[m __name__ == [95m"__main__"[m:
+    main()[41;11H[1m--a[m[41;13H[K[41;139H154,1[9CBot[40;1H[?25h[41;1H[K[40;1H[?25l[41;129H^[[40;1H[41;129H  [40;1H[41;139H154,0-1[7CBot[40;1H[?25h[?25l[41;129H:[40;1H[41;129H[K[41;1H:[?25hwq![?25l[?2004l[>4;m"scan_stale_branches.py" 154L, 4580B written[23;2t[23;1t
+[?1004l[?2004l[?1l>[?1049l[23;0;0t[?25h[>4;m[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ [7mgit push -u origin main[27mgit push -u origin main
+[?2004lremote: Repository not found.
+fatal: repository 'https://github.com/ATT-TEST-GA/github-ops-automation.git/' not found
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ ls
+[?2004l[0m[01;32mscan_stale_branches.py[0m
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ ls -ltr
+[?2004ltotal 8
+-rwxr-xr-x 1 devops devops 4580 Feb  9 19:24 [0m[01;32mscan_stale_branches.py[0m
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ cat scan_stale_branches.py 
+[?2004l#!/usr/bin/env python3
+"""
+Enterprise GitHub stale branch scanner
+Read-only, audit-safe, calendar-month based
+"""
+
+import argparse
+import csv
+import datetime
+import os
+import requests
+from zoneinfo import ZoneInfo
+
+# ---- Constants (Governance Approved) ----
+PROTECTED_BRANCHES = {"main", "master", "develop", "prod"}
+RELEASE_PREFIX = "release/"
+ET = ZoneInfo("America/New_York")
+UTC = datetime.timezone.utc
+
+# ---- Helpers ----
+def github_get(url: str, headers: dict):
+    response = requests.get(url, headers=headers, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Scan GitHub org for stale branches")
+    parser.add_argument("--org", required=True)
+    parser.add_argument("--itaps", required=True)
+    parser.add_argument("--months", type=int, required=True)
+    parser.add_argument("--out", required=True)
+    return parser.parse_args()
+
+# ---- Main Logic ----
+def main():
+    args = parse_args()
+
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        raise RuntimeError("GITHUB_TOKEN not set")
+
+    headers = {
+        "Authorization": f"token {token}",
+        "Accept": "application/vnd.github+json"
+    }
+
+    itap_ids = [i.strip() for i in args.itaps.split(",")]
+
+    now_et = datetime.datetime.now(ET)
+
+    # Calendar month cutoff
+    cutoff_month = now_et.month - args.months
+    cutoff_year = now_et.year
+    while cutoff_month <= 0:
+        cutoff_month += 12
+        cutoff_year -= 1
+    cutoff = datetime.datetime(cutoff_year, cutoff_month, 1, tzinfo=ET)
+
+    repos = []
+    page = 1
+    while True:
+        batch = github_get(
+            f"https://api.github.com/orgs/{args.org}/repos?per_page=100&page={page}",
+            headers
+        )
+        if not batch:
+            break
+        repos.extend(batch)
+        page += 1
+
+    stale_records = []
+
+    for repo in repos:
+        if not any(itap in repo["name"] for itap in itap_ids):
+            continue
+
+        branches = github_get(repo["branches_url"].replace("{/branch}", ""), headers)
+
+        for branch in branches:
+            name = branch["name"]
+
+            if branch.get("protected"):
+                continue
+            if name in PROTECTED_BRANCHES or name.startswith(RELEASE_PREFIX):
+                continue
+
+            commit_info = github_get(branch["commit"]["url"], headers)["commit"]
+            commit_utc = datetime.datetime.strptime(
+                commit_info["author"]["date"],
+                "%Y-%m-%dT%H:%M:%SZ"
+            ).replace(tzinfo=UTC)
+
+            commit_et = commit_utc.astimezone(ET)
+
+            if commit_et <= cutoff:
+                age_months = (
+                    (now_et.year - commit_et.year) * 12
+                    + (now_et.month - commit_et.month)
+                )
+
+                stale_records.append([
+                    repo["name"],
+                    name,
+                    commit_et.strftime("%Y-%m-%d %I:%M %p %Z"),
+                    age_months,
+                    commit_info["author"]["name"] or "unknown",
+                    commit_info["author"]["email"] or "unknown"
+                ])
+
+    if not stale_records:
+        return
+
+    os.makedirs(args.out, exist_ok=True)
+
+    # CSV (machine-readable)
+    csv_path = f"{args.out}/stale_report.csv"
+    with open(csv_path, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([
+            "Repository", "Branch", "LastCommit(ET)",
+            "AgeMonths", "Author", "Email"
+        ])
+        writer.writerows(stale_records)
+
+    # TXT (human-readable)
+    txt_path = f"{args.out}/stale_report.txt"
+    with open(txt_path, "w") as txtfile:
+        for r in stale_records:
+            txtfile.write(
+                f"Repo: {r[0]}\n"
+                f"Branch: {r[1]}\n"
+                f"Last Commit: {r[2]}\n"
+                f"Age: {r[3]} months\n"
+                f"Author: {r[4]}\n"
+                f"Email: {r[5]}\n"
+                + "-" * 60 + "\n"
+            )
+
+    # Email HTML
+    html_path = f"{args.out}/email.html"
+    with open(html_path, "w") as html:
+        html.write("<h3>Stale Git Branch Report</h3>")
+        html.write("<table border='1' cellpadding='6'>")
+        html.write(
+            "<tr><th>Repo</th><th>Branch</th><th>Last Commit</th>"
+            "<th>Age (Months)</th><th>Author</th><th>Email</th></tr>"
+        )
+        for r in stale_records:
+            html.write("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>")
+        html.write("</table>")
+
+if __name__ == "__main__":
+    main()
+
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ cat scan_stale_branches.py  | grep git[K[K[K-i pat
+[?2004l    csv_[01;31m[Kpat[m[Kh = f"{args.out}/stale_report.csv"
+    with open(csv_[01;31m[Kpat[m[Kh, "w", newline="") as csvfile:
+    txt_[01;31m[Kpat[m[Kh = f"{args.out}/stale_report.txt"
+    with open(txt_[01;31m[Kpat[m[Kh, "w") as txtfile:
+    html_[01;31m[Kpat[m[Kh = f"{args.out}/email.html"
+    with open(html_[01;31m[Kpat[m[Kh, "w") as html:
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation/scripts[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation/scripts[00m$ cd ..
+[?2004l[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ ls -ltr
+[?2004ltotal 64
+drwxr-xr-x 2 devops devops  4096 Feb  9 19:14  [0m[01;34mdocs[0m
+drwxr-xr-x 2 devops devops  4096 Feb  9 19:14  [01;34mreports[0m
+-rw-r--r-- 1 devops devops     0 Feb  9 19:14  README.md
+-rw-r--r-- 1 devops devops  1968 Feb  9 19:23  Jenkinsfile
+drwxr-xr-x 2 devops devops  4096 Feb  9 19:24  [01;34mscripts[0m
+-rw-r--r-- 1 devops devops 49152 Feb  9 19:27 '{'
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ cat Jenkinsfile | grep =[K-i pat
+[?2004l    GITHUB_TOKEN = credentials('github-[01;31m[Kpat[m[K')
+          attachments[01;31m[KPat[m[Ktern: 'reports/*'
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ [7mgit push -u origin main[27mgit push -u origin main
+[?2004lremote: Repository not found.
+fatal: repository 'https://github.com/ATT-TEST-GA/github-ops-automation.git/' not found
+[?2004h]0;devops@SREEYAPUREDDY: ~/github-ops-automation[01;32mdevops@SREEYAPUREDDY[00m:[01;34m~/github-ops-automation[00m$ git remote -v
+[?2004lo
