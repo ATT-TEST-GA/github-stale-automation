@@ -12,7 +12,7 @@ pipeline {
     string(
       name: 'ITAP_IDS',
       defaultValue: 'APM0014540,APM0012058',
-      description: 'Comma-separated ITAP identifiers'
+      description: 'Comma-separated ITAP identifiers (case-insensitive)'
     )
     string(
       name: 'MONTHS_OLD',
@@ -22,7 +22,7 @@ pipeline {
     string(
       name: 'EMAIL_TO',
       defaultValue: 'vsreddy.cloudops@gmail.com',
-      description: 'Notification recipients'
+      description: 'Notification recipients (optional)'
     )
   }
 
@@ -65,9 +65,14 @@ EOF
             set -euo pipefail
             mkdir -p reports
 
+            # Convert ITAP IDs to uppercase (case-insensitive handling)
+            NORMALIZED_ITAPS=$(echo "$ITAP_IDS" | tr "[:lower:]" "[:upper:]")
+
+            echo "Using ITAP IDs: $NORMALIZED_ITAPS"
+
             python3 scripts/scan_stale_branches.py \
               --org "$GITHUB_ORG" \
-              --itaps "$ITAP_IDS" \
+              --itaps "$NORMALIZED_ITAPS" \
               --months "$MONTHS_OLD" \
               --out reports
           '
@@ -77,26 +82,40 @@ EOF
   }
 
   post {
+
     always {
       archiveArtifacts artifacts: 'reports/*', fingerprint: true
     }
 
     success {
       script {
+
         if (!fileExists('reports/stale_report.csv')) {
           echo 'No stale branches found. No email notification sent.'
           return
         }
 
-        emailext(
-          to: params.EMAIL_TO,
-          from: 'jenkins-noreply@att.com',
-          replyTo: 'devops@att.com',
-          subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
-          mimeType: 'text/html',
-          body: readFile('reports/email.html'),
-          attachmentsPattern: 'reports/*'
-        )
+        if (!params.EMAIL_TO?.trim()) {
+          echo 'EMAIL_TO not provided. Skipping email notification.'
+          return
+        }
+
+        try {
+          emailext(
+            to: params.EMAIL_TO,
+            from: 'jenkins-noreply@att.com',
+            replyTo: 'devops@att.com',
+            subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
+            mimeType: 'text/html',
+            body: readFile('reports/email.html'),
+            attachmentsPattern: 'reports/*'
+          )
+          echo 'Email notification sent successfully.'
+        }
+        catch (err) {
+          echo "Email sending failed, but build will NOT fail."
+          echo "Error: ${err}"
+        }
       }
     }
   }
