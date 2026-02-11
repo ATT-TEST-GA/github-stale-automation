@@ -51,9 +51,7 @@ pipeline {
         sh '''
           set -e
           python3 --version
-          python3 - <<EOF
-print("Runtime validation successful")
-EOF
+          echo "Runtime validation successful"
         '''
       }
     }
@@ -61,21 +59,21 @@ EOF
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
-          bash -lc '
-            set -euo pipefail
-            mkdir -p reports
+          set -euo pipefail
+          mkdir -p reports
 
-            # Convert ITAP IDs to uppercase (case-insensitive handling)
-            NORMALIZED_ITAPS=$(echo "$ITAP_IDS" | tr "[:lower:]" "[:upper:]")
+          echo "Starting stale branch scan..."
+          echo "Organization: $GITHUB_ORG"
+          echo "ITAP IDs: $ITAP_IDS"
+          echo "Months Threshold: $MONTHS_OLD"
 
-            echo "Using ITAP IDs: $NORMALIZED_ITAPS"
+          python3 scripts/scan_stale_branches.py \
+            --org "$GITHUB_ORG" \
+            --itaps "$ITAP_IDS" \
+            --months "$MONTHS_OLD" \
+            --out reports
 
-            python3 scripts/scan_stale_branches.py \
-              --org "$GITHUB_ORG" \
-              --itaps "$NORMALIZED_ITAPS" \
-              --months "$MONTHS_OLD" \
-              --out reports
-          '
+          echo "Scan completed."
         '''
       }
     }
@@ -84,14 +82,14 @@ EOF
   post {
 
     always {
-      archiveArtifacts artifacts: 'reports/*', fingerprint: true
+      archiveArtifacts artifacts: 'reports/*', fingerprint: true, allowEmptyArchive: true
     }
 
     success {
       script {
 
         if (!fileExists('reports/stale_report.csv')) {
-          echo 'No stale branches found. No email notification sent.'
+          echo 'No stale branches found. No email notification required.'
           return
         }
 
@@ -113,10 +111,14 @@ EOF
           echo 'Email notification sent successfully.'
         }
         catch (err) {
-          echo "Email sending failed, but build will NOT fail."
-          echo "Error: ${err}"
+          echo "WARNING: Email sending failed, but pipeline will remain SUCCESS."
+          echo "Error details: ${err}"
         }
       }
+    }
+
+    failure {
+      echo 'Pipeline failed during scan execution.'
     }
   }
 }
