@@ -103,8 +103,8 @@ pipeline {
         try {
           emailext(
             to: params.EMAIL_TO,
-            from: 'jenkins-noreply@att.com',
-            replyTo: 'devops@att.com',
+            from: 'vs3790@att.com',
+            replyTo: 'vs3790@att.com',
             subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
             mimeType: 'text/html',
             body: readFile('reports/email.html'),
