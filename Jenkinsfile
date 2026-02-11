@@ -58,24 +58,24 @@ pipeline {
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
-          bash -euo pipefail <<'EOF'
-          mkdir -p reports
+          bash -euo pipefail -c "
+            mkdir -p reports
 
-          echo "======================================"
-          echo "Starting Stale Branch Scan"
-          echo "Organization : $GITHUB_ORG"
-          echo "ITAP IDs     : $ITAP_IDS"
-          echo "Months Old   : $MONTHS_OLD"
-          echo "======================================"
+            echo '======================================'
+            echo 'Starting Stale Branch Scan'
+            echo 'Organization : $GITHUB_ORG'
+            echo 'ITAP IDs     : $ITAP_IDS'
+            echo 'Months Old   : $MONTHS_OLD'
+            echo '======================================'
 
-          python3 scripts/scan_stale_branches.py \
-            --org "$GITHUB_ORG" \
-            --itaps "$ITAP_IDS" \
-            --months "$MONTHS_OLD" \
-            --out reports
+            python3 scripts/scan_stale_branches.py \
+              --org \"$GITHUB_ORG\" \
+              --itaps \"$ITAP_IDS\" \
+              --months \"$MONTHS_OLD\" \
+              --out reports
 
-          echo "Scan completed successfully."
-          EOF
+            echo 'Scan completed successfully.'
+          "
         '''
       }
     }
