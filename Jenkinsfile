@@ -49,7 +49,6 @@ pipeline {
     stage('Validate Runtime') {
       steps {
         sh '''
-          set -e
           python3 --version
           echo "Runtime validation successful"
         '''
@@ -59,13 +58,15 @@ pipeline {
     stage('Run Stale Branch Scan') {
       steps {
         sh '''
-          set -euo pipefail
+          bash -euo pipefail <<'EOF'
           mkdir -p reports
 
-          echo "Starting stale branch scan..."
-          echo "Organization: $GITHUB_ORG"
-          echo "ITAP IDs: $ITAP_IDS"
-          echo "Months Threshold: $MONTHS_OLD"
+          echo "======================================"
+          echo "Starting Stale Branch Scan"
+          echo "Organization : $GITHUB_ORG"
+          echo "ITAP IDs     : $ITAP_IDS"
+          echo "Months Old   : $MONTHS_OLD"
+          echo "======================================"
 
           python3 scripts/scan_stale_branches.py \
             --org "$GITHUB_ORG" \
@@ -73,7 +74,8 @@ pipeline {
             --months "$MONTHS_OLD" \
             --out reports
 
-          echo "Scan completed."
+          echo "Scan completed successfully."
+          EOF
         '''
       }
     }
