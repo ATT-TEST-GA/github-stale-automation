@@ -9,21 +9,17 @@ pipeline {
   }
 
   parameters {
-    string(
-      name: 'ITAP_IDS',
-      defaultValue: 'APM0014540,APM0012058',
-      description: 'Comma-separated ITAP identifiers (case-insensitive)'
-    )
-    string(
-      name: 'MONTHS_OLD',
-      defaultValue: '6',
-      description: 'Branches inactive for N calendar months'
-    )
-    string(
-      name: 'EMAIL_TO',
-      defaultValue: 'vsreddy.cloudops@gmail.com',
-      description: 'Notification recipients (optional)'
-    )
+    string(name: 'ITAP_IDS',
+           defaultValue: 'APM0014540,APM0012058',
+           description: 'Comma-separated ITAP identifiers (case-insensitive)')
+
+    string(name: 'MONTHS_OLD',
+           defaultValue: '6',
+           description: 'Branches inactive for N calendar months')
+
+    string(name: 'EMAIL_TO',
+           defaultValue: 'vsreddy.cloudops@gmail.com',
+           description: 'Notification recipients (optional)')
   }
 
   environment {
@@ -79,48 +75,50 @@ pipeline {
         '''
       }
     }
-  }
 
-  post {
+    stage('Archive & Notify') {
+      steps {
+        script {
 
-    always {
-      archiveArtifacts artifacts: 'reports/*', fingerprint: true, allowEmptyArchive: true
-    }
+          // Always archive safely
+          archiveArtifacts artifacts: 'reports/*',
+                           fingerprint: true,
+                           allowEmptyArchive: true
 
-    success {
-      script {
+          if (!fileExists('reports/stale_report.csv')) {
+            echo 'No stale branches found. No email required.'
+            return
+          }
 
-        if (!fileExists('reports/stale_report.csv')) {
-          echo 'No stale branches found. No email notification required.'
-          return
-        }
+          if (!params.EMAIL_TO?.trim()) {
+            echo 'EMAIL_TO not provided. Skipping email.'
+            return
+          }
 
-        if (!params.EMAIL_TO?.trim()) {
-          echo 'EMAIL_TO not provided. Skipping email notification.'
-          return
-        }
-
-        try {
-          emailext(
-            to: params.EMAIL_TO,
-            from: 'vs3790@att.com',
-            replyTo: 'vs3790@att.com',
-            subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
-            mimeType: 'text/html',
-            body: readFile('reports/email.html'),
-            attachmentsPattern: 'reports/*'
-          )
-          echo 'Email notification sent successfully.'
-        }
-        catch (err) {
-          echo "WARNING: Email sending failed, but pipeline will remain SUCCESS."
-          echo "Error details: ${err}"
+          try {
+            emailext(
+              to: params.EMAIL_TO,
+              from: 'vs3790@att.com',
+              replyTo: 'vs3790@att.com',
+              subject: "Stale GitHub Branch Audit Report – ${env.GITHUB_ORG}",
+              mimeType: 'text/html',
+              body: readFile('reports/email.html'),
+              attachmentsPattern: 'reports/*'
+            )
+            echo 'Email sent successfully.'
+          }
+          catch (err) {
+            echo "WARNING: Email failed, but build remains SUCCESS."
+            echo "Error: ${err}"
+          }
         }
       }
     }
+  }
 
+  post {
     failure {
-      echo 'Pipeline failed during scan execution.'
+      echo 'Pipeline failed during execution.'
     }
   }
 }
