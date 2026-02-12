@@ -28,12 +28,12 @@ UTC = datetime.timezone.utc
 GITHUB_API = "https://api.github.com"
 
 BASE_HEADERS = {
-"Accept": "application/vnd.github+json",
-"User-Agent": "enterprise-github-audit-prod"
+    "Accept": "application/vnd.github+json",
+    "User-Agent": "enterprise-github-audit-prod"
 }
 
 MAX_RETRIES = 3
-RETRY_BACKOFF = 2 # seconds
+RETRY_BACKOFF = 2  # seconds
 
 
 # ==============================
@@ -41,47 +41,47 @@ RETRY_BACKOFF = 2 # seconds
 # ==============================
 
 def github_get(url, headers, params=None):
-"""GET wrapper with retry + rate-limit awareness"""
+    """GET wrapper with retry + rate-limit awareness"""
 
-if params:
-query = urllib.parse.urlencode(params)
-url = f"{url}?{query}"
+    if params:
+        query = urllib.parse.urlencode(params)
+        url = f"{url}?{query}"
 
-for attempt in range(1, MAX_RETRIES + 1):
-try:
-req = urllib.request.Request(url, headers=headers)
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            req = urllib.request.Request(url, headers=headers)
 
-with urllib.request.urlopen(req, timeout=30) as response:
-status = response.status
-data = response.read().decode()
+            with urllib.request.urlopen(req, timeout=30) as response:
+                status = response.status
+                data = response.read().decode()
 
-if status == 403 and "rate limit" in data.lower():
-reset_time = int(response.headers.get("X-RateLimit-Reset", 0))
-sleep_time = max(reset_time - int(time.time()), 5)
-print(f"[WARN] Rate limit reached. Sleeping {sleep_time}s...", flush=True)
-time.sleep(sleep_time)
-continue
+                if status == 403 and "rate limit" in data.lower():
+                    reset_time = int(response.headers.get("X-RateLimit-Reset", 0))
+                    sleep_time = max(reset_time - int(time.time()), 5)
+                    print(f"[WARN] Rate limit reached. Sleeping {sleep_time}s...", flush=True)
+                    time.sleep(sleep_time)
+                    continue
 
-if status >= 400:
-raise urllib.error.HTTPError(url, status, "HTTP error", response.headers, None)
+                if status >= 400:
+                    raise urllib.error.HTTPError(url, status, "HTTP error", response.headers, None)
 
-return json.loads(data)
+                return json.loads(data)
 
-except urllib.error.HTTPError as e:
-if attempt == MAX_RETRIES:
-print(f"[ERROR] GitHub API HTTP error after retries: {e}", file=sys.stderr)
-raise
-sleep = RETRY_BACKOFF ** attempt
-print(f"[WARN] API call failed (attempt {attempt}). Retrying in {sleep}s...")
-time.sleep(sleep)
+        except urllib.error.HTTPError as e:
+            if attempt == MAX_RETRIES:
+                print(f"[ERROR] GitHub API HTTP error after retries: {e}", file=sys.stderr)
+                raise
+            sleep = RETRY_BACKOFF ** attempt
+            print(f"[WARN] API call failed (attempt {attempt}). Retrying in {sleep}s...")
+            time.sleep(sleep)
 
-except urllib.error.URLError as e:
-if attempt == MAX_RETRIES:
-print(f"[ERROR] Network error after retries: {e}", file=sys.stderr)
-raise
-sleep = RETRY_BACKOFF ** attempt
-print(f"[WARN] Network error (attempt {attempt}). Retrying in {sleep}s...")
-time.sleep(sleep)
+        except urllib.error.URLError as e:
+            if attempt == MAX_RETRIES:
+                print(f"[ERROR] Network error after retries: {e}", file=sys.stderr)
+                raise
+            sleep = RETRY_BACKOFF ** attempt
+            print(f"[WARN] Network error (attempt {attempt}). Retrying in {sleep}s...")
+            time.sleep(sleep)
 
 
 # ==============================
@@ -89,156 +89,161 @@ time.sleep(sleep)
 # ==============================
 
 def parse_args():
-p = argparse.ArgumentParser()
-p.add_argument("--org", required=True)
-p.add_argument("--itaps", required=True)
-p.add_argument("--months", type=int, required=True)
-p.add_argument("--out", required=True)
-return p.parse_args()
+    p = argparse.ArgumentParser()
+    p.add_argument("--org", required=True)
+    p.add_argument("--itaps", required=True)
+    p.add_argument("--months", type=int, required=True)
+    p.add_argument("--out", required=True)
+    return p.parse_args()
 
 
 def calculate_cutoff(now_et, months):
-month = now_et.month - months
-year = now_et.year
-while month <= 0:
-month += 12
-year -= 1
-return datetime.datetime(year, month, 1, tzinfo=ET)
+    month = now_et.month - months
+    year = now_et.year
+    while month <= 0:
+        month += 12
+        year -= 1
+    return datetime.datetime(year, month, 1, tzinfo=ET)
 
 
 # ==============================
-# MAIN LOGIC
+# MAIN
 # ==============================
 
 def main():
-args = parse_args()
+    args = parse_args()
 
-token = os.environ.get("GITHUB_TOKEN")
-if not token:
-raise RuntimeError("GITHUB_TOKEN not set")
+    token = os.environ.get("GITHUB_TOKEN")
+    if not token:
+        raise RuntimeError("GITHUB_TOKEN not set")
 
-headers = {**BASE_HEADERS, "Authorization": f"token {token}"}
+    headers = {**BASE_HEADERS, "Authorization": f"token {token}"}
 
-itaps = [i.strip().upper() for i in args.itaps.split(",")]
+    itaps = [i.strip().upper() for i in args.itaps.split(",")]
 
-now_et = datetime.datetime.now(ET)
-cutoff = calculate_cutoff(now_et, args.months)
+    now_et = datetime.datetime.now(ET)
+    cutoff = calculate_cutoff(now_et, args.months)
 
-print(f"[INFO] Scan started for org: {args.org}")
-print(f"[INFO] Cutoff date: {cutoff.strftime('%Y-%m-%d %Z')}")
+    print(f"[INFO] Scan started for org: {args.org}")
+    print(f"[INFO] Cutoff date: {cutoff.strftime('%Y-%m-%d %Z')}")
 
-# ==============================
-# Fetch Repositories
-# ==============================
+    # ==============================
+    # Fetch Repositories
+    # ==============================
 
-repos = []
-page = 1
+    repos = []
+    page = 1
 
-while True:
-data = github_get(
-f"{GITHUB_API}/orgs/{args.org}/repos",
-headers,
-{"per_page": 100, "page": page}
-)
-if not data:
-break
-repos.extend(data)
-page += 1
+    while True:
+        data = github_get(
+            f"{GITHUB_API}/orgs/{args.org}/repos",
+            headers,
+            {"per_page": 100, "page": page}
+        )
+        if not data:
+            break
+        repos.extend(data)
+        page += 1
 
-print(f"[INFO] Total repos fetched: {len(repos)}")
+    print(f"[INFO] Total repos fetched: {len(repos)}")
 
-stale = []
+    stale = []
 
-# ==============================
-# Scan Branches
-# ==============================
+    # ==============================
+    # Scan Branches
+    # ==============================
 
-for repo in repos:
-repo_name = repo.get("name", "")
-repo_upper = repo_name.upper()
+    for repo in repos:
+        repo_name = repo.get("name", "")
+        repo_upper = repo_name.upper()
 
-if not any(itap in repo_upper for itap in itaps):
-continue
+        if not any(itap in repo_upper for itap in itaps):
+            continue
 
-print(f"[INFO] Scanning repo: {repo_name}")
+        print(f"[INFO] Scanning repo: {repo_name}")
 
-branch_page = 1
+        branch_page = 1
 
-while True:
-branches = github_get(
-f"{GITHUB_API}/repos/{args.org}/{repo_name}/branches",
-headers,
-{"per_page": 100, "page": branch_page}
-)
+        while True:
+            branches = github_get(
+                f"{GITHUB_API}/repos/{args.org}/{repo_name}/branches",
+                headers,
+                {"per_page": 100, "page": branch_page}
+            )
 
-if not branches:
-break
+            if not branches:
+                break
 
-for br in branches:
-name = br.get("name", "")
+            for br in branches:
+                name = br.get("name", "")
 
-if br.get("protected"):
-continue
-if name in PROTECTED_BRANCHES or name.startswith(RELEASE_PREFIX):
-continue
+                if br.get("protected"):
+                    continue
+                if name in PROTECTED_BRANCHES:
+                    continue
+                if name.startswith(RELEASE_PREFIX):
+                    continue
 
-commit_data = github_get(br["commit"]["url"], headers)
-commit = commit_data.get("commit", {})
+                commit_url = br.get("commit", {}).get("url")
+                if not commit_url:
+                    continue
 
-author_info = commit.get("author") or {}
-date_str = author_info.get("date")
+                commit_data = github_get(commit_url, headers)
+                commit = commit_data.get("commit", {})
+                author_info = commit.get("author") or {}
+                date_str = author_info.get("date")
 
-if not date_str:
-continue
+                if not date_str:
+                    continue
 
-commit_utc = datetime.datetime.strptime(
-date_str, "%Y-%m-%dT%H:%M:%SZ"
-).replace(tzinfo=UTC)
+                commit_utc = datetime.datetime.strptime(
+                    date_str, "%Y-%m-%dT%H:%M:%SZ"
+                ).replace(tzinfo=UTC)
 
-commit_et = commit_utc.astimezone(ET)
+                commit_et = commit_utc.astimezone(ET)
 
-if commit_et <= cutoff:
-age = (
-(now_et.year - commit_et.year) * 12 +
-(now_et.month - commit_et.month)
-)
+                if commit_et <= cutoff:
+                    age = (
+                        (now_et.year - commit_et.year) * 12 +
+                        (now_et.month - commit_et.month)
+                    )
 
-stale.append([
-repo_name,
-name,
-commit_et.strftime("%Y-%m-%d %I:%M %p %Z"),
-age,
-author_info.get("name") or "unknown",
-author_info.get("email") or "unknown"
-])
+                    stale.append([
+                        repo_name,
+                        name,
+                        commit_et.strftime("%Y-%m-%d %I:%M %p %Z"),
+                        age,
+                        author_info.get("name") or "unknown",
+                        author_info.get("email") or "unknown"
+                    ])
 
-branch_page += 1
+            branch_page += 1
 
-if not stale:
-print("[INFO] No stale branches found.")
-return
+    if not stale:
+        print("[INFO] No stale branches found.")
+        return
 
-stale.sort(key=lambda x: x[3], reverse=True)
+    stale.sort(key=lambda x: x[3], reverse=True)
 
-os.makedirs(args.out, exist_ok=True)
+    os.makedirs(args.out, exist_ok=True)
 
-# ==============================
-# CSV Output
-# ==============================
+    # ==============================
+    # CSV Output
+    # ==============================
 
-with open(f"{args.out}/stale_report.csv", "w", newline="") as f:
-writer = csv.writer(f)
-writer.writerow(["Repo", "Branch", "Last Commit", "Age (Months)", "Author", "Email"])
-writer.writerows(stale)
+    with open(f"{args.out}/stale_report.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Repo", "Branch", "Last Commit", "Age (Months)", "Author", "Email"])
+        writer.writerows(stale)
 
-# ==============================
-# HTML Email Output
-# ==============================
+    # ==============================
+    # HTML Output
+    # ==============================
 
-scan_time = now_et.strftime("%a %b %d %H:%M:%S %Z %Y")
+    scan_time = now_et.strftime("%a %b %d %H:%M:%S %Z %Y")
 
-with open(f"{args.out}/email.html", "w") as f:
-f.write(f"""
+    with open(f"{args.out}/email.html", "w") as f:
+        f.write(f"""
 <h2>Stale GitHub Branch Audit Report</h2>
 <p><b>Organization:</b> {args.org}</p>
 <p><b>Scan Date:</b> {scan_time}</p>
@@ -256,8 +261,8 @@ f.write(f"""
 </tr>
 """)
 
-for r in stale:
-f.write(f"""
+        for r in stale:
+            f.write(f"""
 <tr>
 <td>{r[0]}</td>
 <td>{r[1]}</td>
@@ -268,7 +273,7 @@ f.write(f"""
 </tr>
 """)
 
-f.write("""
+        f.write("""
 </table>
 
 <br/>
@@ -281,8 +286,8 @@ f.write("""
 </ul>
 """)
 
-print(f"[INFO] Stale branch report generated. Count: {len(stale)}")
+    print(f"[INFO] Stale branch report generated. Count: {len(stale)}")
 
 
 if __name__ == "__main__":
-main()
+    main()
